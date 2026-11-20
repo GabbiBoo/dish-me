@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DishMeAPP.Views.MinePage"
+             Title="Mine"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Style Definitions 样式定义 -->
+            <Style x:Key="SectionFrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="Margin" Value="0,8" />
+                <Setter Property="HasShadow" Value="False" />
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#2C3E50" />
+                <Setter Property="Margin" Value="0,0,0,12" />
+            </Style>
+
+            <Style x:Key="MenuButtonStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="16,12" />
+                <Setter Property="Margin" Value="0,4" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BorderColor" Value="#E0E0E0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+
+            <!-- User Profile Section 用户资料区域 -->
+            <Frame Style="{StaticResource SectionFrameStyle}">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="User Profile" Style="{StaticResource SectionTitleStyle}" />
+
+                    <!-- User Avatar and Info 用户头像和信息 -->
+                    <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+                        <!-- User Avatar 用户头像 -->
+                        <Frame WidthRequest="60"
+                               HeightRequest="60"
+                               CornerRadius="30"
+                               Padding="0"
+                               HasShadow="False"
+                               BackgroundColor="#E41088"
+                               HorizontalOptions="Center">
+                            <Image Source="mine.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Frame>
+
+                        <!-- User Info 用户信息 -->
+                        <Label Text="Welcome to DishMe!"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#2C3E50"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Role Management Section 角色管理区域 -->
+            <Frame Style="{StaticResource SectionFrameStyle}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Role Management" Style="{StaticResource SectionTitleStyle}" />
+
+                    <!-- Role Switch Button 角色切换按钮 -->
+                    <Frame Style="{StaticResource MenuButtonStyle}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SwitchRoleCommand}" />
+                        </Frame.GestureRecognizers>
+
+                        <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                            <Label Text="{Binding RoleButtonText}"
+                                   FontSize="16"
+                                   TextColor="#2C3E50"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand" />
+                            <Label Text=">"
+                                   FontSize="18"
+                                   TextColor="#95A5A6"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- App Features Section 应用功能区域 -->
+            <Frame Style="{StaticResource SectionFrameStyle}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="App Features" Style="{StaticResource SectionTitleStyle}" />
+
+                    <!-- Manage Categories Button 管理分类按钮 -->
+                    <Frame Style="{StaticResource MenuButtonStyle}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ManageCategoriesCommand}" />
+                        </Frame.GestureRecognizers>
+
+                        <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                            <Label Text="Manage Categories"
+                                   FontSize="16"
+                                   TextColor="#2C3E50"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand" />
+                            <Label Text=">"
+                                   FontSize="18"
+                                   TextColor="#95A5A6"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+
+                    <!-- Order History Button 订单历史按钮 -->
+                    <Frame Style="{StaticResource MenuButtonStyle}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OrderHistoryCommand}" />
+                        </Frame.GestureRecognizers>
+
+                        <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                            <Label Text="Order History"
+                                   FontSize="16"
+                                   TextColor="#2C3E50"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand" />
+                            <Label Text=">"
+                                   FontSize="18"
+                                   TextColor="#95A5A6"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- App Information Section 应用信息区域 -->
+            <Frame Style="{StaticResource SectionFrameStyle}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="App Information" Style="{StaticResource SectionTitleStyle}" />
+
+                    <!-- About App Button 关于应用按钮 -->
+                    <Frame Style="{StaticResource MenuButtonStyle}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AboutAppCommand}" />
+                        </Frame.GestureRecognizers>
+
+                        <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                            <Label Text="About App"
+                                   FontSize="16"
+                                   TextColor="#2C3E50"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand" />
+                            <Label Text=">"
+                                   FontSize="18"
+                                   TextColor="#95A5A6"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+    <!-- Gradient Background 渐变背景 -->
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FEC5BB" Offset="0"/>
+            <GradientStop Color="#FFC8DD" Offset="0.4"/>
+            <GradientStop Color="#FEC5BB" Offset="0.8"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+</ContentPage>

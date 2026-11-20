@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DishMeAPP.Views.RecipesPage"
+             Title="Add Recipe"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Style Definitions 样式定义 -->
+            <Style x:Key="SectionFrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#F8F9FA" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="16" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Margin" Value="0,8" />
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#2C3E50" />
+                <Setter Property="Margin" Value="0,0,0,8" />
+            </Style>
+
+            <Style x:Key="InputEntryStyle" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="TextColor" Value="#2C3E50" />
+                <Setter Property="PlaceholderColor" Value="#95A5A6" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HeightRequest" Value="44" />
+            </Style>
+
+            <Style x:Key="InputEditorStyle" TargetType="Editor">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="TextColor" Value="#2C3E50" />
+                <Setter Property="PlaceholderColor" Value="#95A5A6" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="MinimumHeightRequest" Value="100" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <!-- Basic Information and Photo Upload 基本信息和图片上传 -->
+            <Frame Style="{StaticResource SectionFrameStyle}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Basic Information" Style="{StaticResource SectionTitleStyle}" />
+
+                    <!-- Photo Upload Area 图片上传区域 -->
+                    <Frame BackgroundColor="White"
+                           BorderColor="#DDD"
+                           CornerRadius="12"
+                           Padding="20"
+                           HeightRequest="120"
+                           WidthRequest="120"
+                           HorizontalOptions="Center"
+                           HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="UploadImage" />
+                        </Frame.GestureRecognizers>
+
+                        <!-- Placeholder icon or user image 占位图标或用户图片 -->
+                        <Grid>
+                            <!-- Dashed border effect 虚线边框效果 -->
+                            <Border Stroke="#DDD"
+                                    StrokeThickness="2"
+                                    StrokeDashArray="5,5"
+                                    BackgroundColor="Transparent"
+                                    IsVisible="{Binding HasNoImage}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8" />
+                                </Border.StrokeShape>
+                            </Border>
+
+                            <!-- Camera icon (default display) 相机图标（默认显示） -->
+                            <VerticalStackLayout HorizontalOptions="Center"
+                                                 VerticalOptions="Center"
+                                                 IsVisible="{Binding HasNoImage}">
+                                <Image Source="camera.svg"
+                                       HeightRequest="40"
+                                       WidthRequest="40"
+                                       HorizontalOptions="Center" />
+                                <Label Text="Add Photo"
+                                       FontSize="12"
+                                       TextColor="#95A5A6"
+                                       HorizontalOptions="Center"
+                                       Margin="0,5,0,0" />
+                            </VerticalStackLayout>
+
+                            <!-- User selected image 用户选择的图片 -->
+                            <Image Source="{Binding RecipeImagePath}"
+                                   Aspect="AspectFill"
+                                   IsVisible="{Binding HasImage}"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Recipe Name Input 菜谱名称输入 -->
+                    <Entry Placeholder="Please enter the recipe name"
+                           Text="{Binding RecipeName}"
+                           Style="{StaticResource InputEntryStyle}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Category Selection 分类选择 -->
+            <Frame Style="{StaticResource SectionFrameStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Recipe Category" Style="{StaticResource SectionTitleStyle}" />
+
+                    <Frame BackgroundColor="White"
+                           CornerRadius="8"
+                           Padding="12"
+                           HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectCategoryCommand}" />
+                        </Frame.GestureRecognizers>
+
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding CategoryDisplayText}"
+                                   FontSize="16"
+                                   TextColor="#2C3E50"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center" />
+
+                            <Label Text=">"
+                                   FontSize="18"
+                                   TextColor="#95A5A6"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Cooking Steps 制作步骤 -->
+            <Frame Style="{StaticResource SectionFrameStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Cooking Steps" Style="{StaticResource SectionTitleStyle}" />
+
+                    <Editor Placeholder="Please describe the steps in detail"
+                            Text="{Binding RecipeSteps}"
+                            Style="{StaticResource InputEditorStyle}"
+                            HeightRequest="120" />
+
+                    <Label Text="{Binding StepsCharacterCount}"
+                           FontSize="12"
+                           TextColor="#95A5A6"
+                           HorizontalOptions="End" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Ingredient List 用料清单 -->
+            <Frame Style="{StaticResource SectionFrameStyle}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Ingredients List" Style="{StaticResource SectionTitleStyle}" />
+
+                    <Editor Placeholder="Enter required ingredients, one per line"
+                            Text="{Binding RecipeIngredients}"
+                            Style="{StaticResource InputEditorStyle}"
+                            HeightRequest="100" />
+
+                    <Label Text="{Binding IngredientsCharacterCount}"
+                           FontSize="12"
+                           TextColor="#95A5A6"
+                           HorizontalOptions="End" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Action Buttons 操作按钮区域 -->
+            <VerticalStackLayout Spacing="12" Margin="0,20,0,40">
+                <!-- Save Button 保存按钮 -->
+                <Button Text="Save Recipe"
+                        BackgroundColor="#E41088"
+                        TextColor="White"
+                        CornerRadius="12"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        HeightRequest="50"
+                        Command="{Binding SaveRecipeCommand}"
+                        IsEnabled="{Binding IsNotLoading}"
+                        HorizontalOptions="Fill" />
+
+                <!-- Loading Indicator 加载指示器 -->
+                <ActivityIndicator IsVisible="{Binding IsLoading}"
+                                   IsRunning="{Binding IsLoading}"
+                                   Color="#E41088"
+                                   HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+    <!-- Gradient Background 渐变背景 -->
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FEC5BB" Offset="0"/>
+            <GradientStop Color="#FFC8DD" Offset="0.4"/>
+            <GradientStop Color="#FEC5BB" Offset="0.8"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+</ContentPage>

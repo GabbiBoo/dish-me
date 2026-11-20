@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="DishMeAPP.Views.OrderPage"
+             Title="Order"
+             BackgroundColor="White">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="10">
+
+                <!-- 顶部厨师信息 -->
+                <StackLayout BackgroundColor="#FAE1DD" Padding="15,10">
+                    <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                        <!-- 用户头像 -->
+                        <Frame WidthRequest="45"
+                               HeightRequest="45"
+                               CornerRadius="22.5"
+                               Padding="0"
+                               HasShadow="False"
+                               BackgroundColor="#E41088"
+                               VerticalOptions="Center">
+                            <Grid>
+                                <Ellipse Fill="White"
+                                         WidthRequest="16"
+                                         HeightRequest="16"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Start"
+                                         Margin="0,10,0,0" />
+                                <Ellipse Fill="White"
+                                         WidthRequest="24"
+                                         HeightRequest="16"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="End"
+                                         Margin="0,0,0,6" />
+                            </Grid>
+                        </Frame>
+
+                        <!-- 用户信息 -->
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                <Label Text="{Binding CurrentRoleText}" FontSize="16" TextColor="#E41088" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                            <Label Text="Today's Chef: Gabby | Today's Diner: Ray"
+                                   FontSize="14" TextColor="#E41088" />
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </StackLayout>
+
+                <!-- 顶部操作按钮 -->
+                <HorizontalStackLayout Spacing="10" Margin="0,10,0,10">
+                    <!-- 可选功能按钮位置 -->
+                </HorizontalStackLayout>
+
+                <!-- 主体内容区 -->
+                <Grid ColumnDefinitions="120,*" ColumnSpacing="8">
+                    <!-- 左侧分类 -->
+                    <CollectionView Grid.Column="0" 
+                                    ItemsSource="{Binding Categories}"
+                                    SelectedItem="{Binding SelectedCategory}"
+                                    SelectionMode="Single"
+                                    VerticalOptions="Start">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="#E0E0E0"
+                                       CornerRadius="8"
+                                       Padding="8,12"
+                                       Margin="0,0,0,8"
+                                       HasShadow="False"
+                                       BackgroundColor="White">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectCategoryCommand}"
+                                                              CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                        <Image Source="{Binding IconPath}"
+                                               WidthRequest="20"
+                                               HeightRequest="20"
+                                               VerticalOptions="End"
+                                               Margin="{Binding IconMargin}"
+                                               Opacity="{Binding IconOpacity}">
+                                            <Image.Behaviors>
+                                                <toolkit:IconTintColorBehavior TintColor="{Binding IconColor}" />
+                                            </Image.Behaviors>
+                                        </Image>
+                                        <Label Text="{Binding Name}"
+                                               FontSize="12"
+                                               TextColor="{Binding TextColor}"
+                                               FontAttributes="{Binding FontWeight}"
+                                               VerticalOptions="End"
+                                               LineBreakMode="WordWrap"
+                                               MaxLines="2" />
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- 右侧菜品列表 -->
+                    <CollectionView Grid.Column="1"
+                                    ItemsSource="{Binding Dishes}"
+                                    Margin="0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="#E0E0E0"
+                                       CornerRadius="8"
+                                       Padding="10"
+                                       Margin="0,0,8,8"
+                                       HasShadow="False"
+                                       BackgroundColor="White"
+                                       HeightRequest="80">
+                                    <Grid ColumnDefinitions="60,*,Auto" ColumnSpacing="10">
+                                        <Frame Grid.Column="0"
+                                               WidthRequest="60"
+                                               HeightRequest="60"
+                                               CornerRadius="6"
+                                               Padding="0"
+                                               HasShadow="False"
+                                               BackgroundColor="#F5F5F5"
+                                               VerticalOptions="Center">
+                                            <Image Source="{Binding Image}" Aspect="AspectFill" />
+                                        </Frame>
+
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#2C3E50"
+                                                   LineBreakMode="WordWrap"
+                                                   MaxLines="2"
+                                                   VerticalOptions="Center" />
+                                        </VerticalStackLayout>
+
+                                        <StackLayout Grid.Column="2"
+                                                     Orientation="Horizontal"
+                                                     Spacing="8"
+                                                     VerticalOptions="Center"
+                                                     HorizontalOptions="Center">
+                                            <Button Text="-"
+                                                    WidthRequest="32"
+                                                    HeightRequest="32"
+                                                    CornerRadius="16"
+                                                    FontSize="18"
+                                                    FontAttributes="Bold"
+                                                    Padding="0"
+                                                    BackgroundColor="#E41088"
+                                                    TextColor="White"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RemoveFromCartCommand}"
+                                                    CommandParameter="{Binding .}"
+                                                    IsVisible="{Binding IsInCart}" />
+                                            <Label Text="{Binding Quantity}"
+                                                   FontSize="14"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#E41088"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Center"
+                                                   MinimumWidthRequest="20"
+                                                   HorizontalTextAlignment="Center"
+                                                   IsVisible="{Binding IsInCart}" />
+                                            <Button Text="+"
+                                                    WidthRequest="32"
+                                                    HeightRequest="32"
+                                                    CornerRadius="16"
+                                                    FontSize="18"
+                                                    FontAttributes="Bold"
+                                                    Padding="0"
+                                                    BackgroundColor="#E41088"
+                                                    TextColor="White"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- 浮动购物车 -->
+        <Frame BackgroundColor="#E41088"
+               CornerRadius="25"
+               Padding="16,12"
+               Margin="16,0,16,20"
+               HasShadow="True"
+               VerticalOptions="End"
+               IsVisible="{Binding Cart.HasItems}">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ViewCartCommand}" />
+            </Frame.GestureRecognizers>
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                <Label Grid.Column="0"
+                       Text="🛒"
+                       FontSize="20"
+                       TextColor="White"
+                       VerticalOptions="Center" />
+                <Label Grid.Column="1"
+                       Text="{Binding Cart.TotalItems, StringFormat='{0} items in cart'}"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+                <Label Grid.Column="2"
+                       Text="{Binding Cart.TotalItems}"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End" />
+            </Grid>
+        </Frame>
+    </Grid>
+
+</ContentPage>

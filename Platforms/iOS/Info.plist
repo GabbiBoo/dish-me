@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>LSRequiresIPhoneOS</key>
+		<true/>
+		<key>UIDeviceFamily</key>
+		<array>
+			<integer>1</integer>
+			<integer>2</integer>
+		</array>
+		<key>UIRequiredDeviceCapabilities</key>
+		<array>
+			<string>arm64</string>
+		</array>
+		<key>UISupportedInterfaceOrientations</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+		</array>
+		<key>UISupportedInterfaceOrientations~ipad</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+		</array>
+		<key>MinimumOSVersion</key>
+		<string>11.0</string>
+		<key>CFBundleDisplayName</key>
+		<string>DishMe</string>
+		<key>CFBundleIdentifier</key>
+		<string>com.dishme.app</string>
+		<key>CFBundleVersion</key>
+		<string>1.0</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+
+		<!-- Camera permission description 相机权限描述 -->
+		<key>NSCameraUsageDescription</key>
+		<string>DishMe needs access to your camera to take photos of your recipes. DishMe需要访问您的相机来为您的菜谱拍照。</string>
+
+		<!-- Photo library permission description 照片库权限描述 -->
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>DishMe needs access to your photo library to select images for your recipes. DishMe需要访问您的照片库来为您的菜谱选择图片。</string>
+
+		<!-- Photo library add permission description 照片库添加权限描述 -->
+		<key>NSPhotoLibraryAddUsageDescription</key>
+		<string>DishMe needs permission to save photos to your photo library. DishMe需要权限将照片保存到您的照片库。</string>
+
+	</dict>
+</plist>
+

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="456" height="456" viewBox="0 0 456 456" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<rect width="456" height="456" fill="#E41088"/>
+	<circle cx="228" cy="228" r="100" fill="white"/>
+	<text x="228" y="240" text-anchor="middle" fill="#E41088" font-size="24" font-family="Arial">DishMe</text>
+</svg>

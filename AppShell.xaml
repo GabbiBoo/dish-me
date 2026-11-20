@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DishMeAPP.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:v="clr-namespace:DishMeAPP.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="White"
+    Shell.TabBarTitleColor="#E41088"
+    Shell.TabBarForegroundColor="#E41088"
+    Shell.TabBarUnselectedColor="#CEDBD3"
+    Title="DishMeAPP">
+
+   <TabBar>
+    <ShellContent
+        Title="Order"
+        ContentTemplate="{DataTemplate v:OrderPage}"
+        Icon="order.png"/>
+    <ShellContent
+        Title="Recipes"
+        ContentTemplate="{DataTemplate v:RecipesPage}"
+        Icon="chefhat.png"/>
+    <ShellContent
+        Title="Mine"
+        ContentTemplate="{DataTemplate v:MinePage}"
+        Icon="mine.png"/>
+    </TabBar>
+
+
+</Shell>

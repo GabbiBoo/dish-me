@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<!-- Camera permissions 相机权限 -->
+	<uses-permission android:name="android.permission.CAMERA" />
+
+	<!-- Storage permissions for saving photos 存储权限用于保存照片 -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+	<!-- Media permissions for accessing gallery 媒体权限用于访问相册 -->
+	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+	<!-- Camera hardware feature 相机硬件功能 -->
+	<uses-feature android:name="android.hardware.camera" android:required="false" />
+	<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+	<!-- Package visibility queries for Android 11+ 包可见性查询，适用于Android 11+ -->
+	<queries>
+		<!-- Camera intent 相机意图 -->
+		<intent>
+			<action android:name="android.media.action.IMAGE_CAPTURE" />
+		</intent>
+		<!-- Gallery/Photo picker intent 相册/照片选择器意图 -->
+		<intent>
+			<action android:name="android.intent.action.GET_CONTENT" />
+			<data android:mimeType="image/*" />
+		</intent>
+		<!-- Alternative photo picker 备用照片选择器 -->
+		<intent>
+			<action android:name="android.intent.action.PICK" />
+			<data android:mimeType="image/*" />
+		</intent>
+	</queries>
+
+	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true">
+	</application>
+
+</manifest>
