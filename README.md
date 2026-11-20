@@ -88,6 +88,6 @@ What is being worked on next, in order:
 
 ## Author
 
-Gabbi — Master of Information Technology, University of Newcastle (Jan 2024 – Dec 2025).
+Gabby Huang — Master of Information Technology, University of Newcastle (Jan 2024 – Dec 2025).
 
 Built solo as a master's project, now being polished as a portfolio piece for AI Engineer / Full-Stack / Software Engineer roles.
